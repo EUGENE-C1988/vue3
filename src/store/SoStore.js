@@ -18,13 +18,6 @@ export const useSoStore = defineStore('SaleOrderStore', {
   },
   actions: {
     async getSoAction(jwtHeadder) {
-
-    //  jwtHeadder = {
-    //   headers: {
-    //     Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTQzNzk4MTYsImlhdCI6MTcxNDM3OTgxNiwibmJmIjoxNzE0Mzc5ODE2fQ.TZwQvlFouwxisH9IoWA1kNiIwdrYlOyqcZ-axtCyt9E`,
-    //   },
-    // }
-
       const response = await axios.get(
         'https://localhost:7297/Card',jwtHeadder
       )

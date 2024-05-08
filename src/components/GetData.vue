@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h3>Sale Order{{ userInfo.JWTToken }}</h3>
+    <h3>Sale Order{{ jwtHeadder }}</h3>
     <ul class="list-group">
       <li class="list-group-item" v-for="so in getAllSo" v-bind:key="so.id">
         <strong> Id : </strong> {{ so.id }} <br />
@@ -42,7 +42,7 @@ import { computed, ref } from "vue";
 const userInfoStore = userUserInfoStore();
 userInfoStore.GetUserInfoAction();
 const userInfo = computed(() => userInfoStore.getUserInfoObj);
-const jwtHeadder = computed(() => userInfoStore.getTokenObj);
+const jwtHeadder = userInfoStore.getTokenObj;
 
 const store = useSoStore();
 store.getSoAction(jwtHeadder);
