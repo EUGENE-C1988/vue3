@@ -29,17 +29,18 @@ export const useSoStore = defineStore('SaleOrderStore', {
       )
       this.SaleOrders.unshift(response.data)
     },
-    async removePostAction(id) {
-      await axios.delete(`https://localhost:7297/Card/${id}`);
-      const index = this.SaleOrders.findIndex(item => item.id === id);
-      if (index !== -1) {
-        this.SaleOrders.splice(index, 1);
-      }
+    async removePostAction(id,jwtHeadder) {
+      await axios.delete(`https://localhost:7297/Card/${id}`,jwtHeadder);
+      // const index = this.SaleOrders.findIndex(item => item.id === id);
+      // if (index !== -1) {
+      //   this.SaleOrders.splice(index, 1);
+      // }
     },
-    async editPostAction(post) {
+    async editPostAction(post,jwtHeadder) {
+      console.log(post)
       await axios.put(
         `https://localhost:7297/Card/${post.id}`,
-        post
+        post,jwtHeadder
       );
       const index = this.SaleOrders.findIndex(c => c.id === post.id)
       if (index !== -1) {

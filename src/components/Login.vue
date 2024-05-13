@@ -1,25 +1,8 @@
 <script setup>
-// import { Form, Field } from "vee-validate";
-// import * as Yup from "yup";
-
-// import { useAuthStore } from "@/stores";
-
-// const schema = Yup.object().shape({
-//   username: Yup.string().required("Username is required"),
-//   password: Yup.string().required("Password is required"),
-// });
-
-// function onSubmit(values, { setErrors }) {
-//   const authStore = useAuthStore();
-//   const { username, password } = values;
-
-//   return authStore
-//     .login(username, password)
-//     .catch((error) => setErrors({ apiError: error }));
-// }
 import { userLoginStore } from "@/store/LoginStore.js";
 import { reactive, computed, ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
+
 const loginInfo = reactive({
   userID: "",
   userPassWord: "",
@@ -28,6 +11,8 @@ const loginInfo = reactive({
 const store = userLoginStore();
 const route = useRoute();
 const router = useRouter();
+
+const show1 = ref(false);
 
 function onSubmit() {
   store.LoginAction(loginInfo);
@@ -42,54 +27,43 @@ function onSubmit() {
       Username: test<br />
       Password: test
     </div> -->
-      <h2>Login</h2>
-      <label for="userID">User ID</label>
-      <input v-model="loginInfo.userID" id="userID" type="text" />
-      <br />
-      <label for="userPassWord">User Password</label>
-      <input v-model="loginInfo.userPassWord" id="userPassWord" type="text" />
-      <br />
-      <button type="submit" class="modal-default-button">登入</button>
-      <br />
-
-      <!-- <Form
-      @submit="onSubmit"
-      :validation-schema="schema"
-      v-slot="{ errors, isSubmitting }"
-    >
-      <div class="form-group">
-        <label>Username</label>
-        <Field
-          name="username"
-          type="text"
-          class="form-control"
-          :class="{ 'is-invalid': errors.username }"
-        />
-        <div class="invalid-feedback">{{ errors.username }}</div>
-      </div>
-      <div class="form-group">
-        <label>Password</label>
-        <Field
-          name="password"
-          type="password"
-          class="form-control"
-          :class="{ 'is-invalid': errors.password }"
-        />
-        <div class="invalid-feedback">{{ errors.password }}</div>
-      </div>
-      <div class="form-group">
-        <button class="btn btn-primary" :disabled="isSubmitting">
-          <span
-            v-show="isSubmitting"
-            class="spinner-border spinner-border-sm mr-1"
-          ></span>
-          Login
-        </button>
-      </div>
-      <div v-if="errors.apiError" class="alert alert-danger mt-3 mb-0">
-        {{ errors.apiError }}
-      </div>
-    </Form> -->
+      <v-responsive class="mx-auto" max-width="300">
+        <h2>Login</h2>
+        <div
+          class="text-subtitle-1 text-medium-emphasis d-flex align-center justify-space-between"
+        >
+          Account
+        </div>
+        <v-text-field
+          v-model="loginInfo.userID"
+          variant="outlined"
+          hide-details="auto"
+          placeholder="Account"
+          prepend-inner-icon="mdi-account-circle-outline"
+          density="compact"
+          clearable
+        ></v-text-field>
+        <br />
+        <div
+          class="text-subtitle-1 text-medium-emphasis d-flex align-center justify-space-between"
+        >
+          Password
+        </div>
+        <v-text-field
+          v-model="loginInfo.userPassWord"
+          :append-inner-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+          :type="show1 ? 'text' : 'password'"
+          @click:append="show1 = !show1"
+          variant="outlined"
+          hide-details="auto"
+          placeholder="Enter your password"
+          prepend-inner-icon="mdi-lock-outline"
+          density="compact"
+          clearable
+        ></v-text-field>
+        <br />
+        <v-btn type="submit" size="large">SIGN IN</v-btn>
+      </v-responsive>
     </form>
   </div>
 </template>
