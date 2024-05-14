@@ -3,9 +3,7 @@ import axios from 'axios'
 import { userUserInfoStore } from "@/store/UserInfoStore";
 
 export const useSoStore = defineStore('SaleOrderStore', {
-  
-
-  state: () => ({
+    state: () => ({
     SaleOrders: []
   }),
   getters: {
@@ -23,18 +21,19 @@ export const useSoStore = defineStore('SaleOrderStore', {
       )
       this.SaleOrders = response.data
     },
-    async addPostAction(post) {
+    async addPostAction(post,jwtHeadder) {
       const response = await axios.post(
-        'https://localhost:7297/Card', post
+        'https://localhost:7297/Card', post, jwtHeadder
       )
-      this.SaleOrders.unshift(response.data)
+      post.id = response.data
+      this.SaleOrders.unshift(post)
     },
     async removePostAction(id,jwtHeadder) {
-      await axios.delete(`https://localhost:7297/Card/${id}`,jwtHeadder);
-      // const index = this.SaleOrders.findIndex(item => item.id === id);
-      // if (index !== -1) {
-      //   this.SaleOrders.splice(index, 1);
-      // }
+      await axios.delete(`https://localhost:7297/Card/${id}`, jwtHeadder);
+      const index = this.SaleOrders.findIndex(item => item.id === id);
+      if (index !== -1) {
+        this.SaleOrders.splice(index, 1);
+      }
     },
     async editPostAction(post,jwtHeadder) {
       console.log(post)

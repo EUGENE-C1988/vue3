@@ -5,7 +5,7 @@
       :headers="headers"
       :items="getAllSo"
       item-key="id"
-      items-per-page="10"
+      items-per-page="20"
       multi-sort
     >
       <template v-slot:top>
@@ -31,6 +31,7 @@
                       <v-text-field
                         v-model="editedItem.id"
                         label="ID"
+                        disabled
                       ></v-text-field>
                     </v-col>
                     <v-col cols="12" md="4" sm="6">
@@ -55,6 +56,12 @@
                       <v-text-field
                         v-model="editedItem.qty"
                         label="Qty"
+                      ></v-text-field>
+                    </v-col>
+                    <v-col cols="12" md="4" sm="6">
+                      <v-text-field
+                        v-model="editedItem.price"
+                        label="Unit Price"
                       ></v-text-field>
                     </v-col>
                     <v-col cols="12" md="4" sm="6">
@@ -167,6 +174,7 @@ const headers = [
     children: [
       { title: "Product Name", value: "productName", sortable: true },
       { title: "Qty", value: "qty", sortable: true },
+      { title: "Unit Price", value: "price", sortable: true },
       { title: "Amount ", value: "amount", sortable: true },
       { title: "Actions", key: "actions", sortable: false },
     ],
@@ -183,6 +191,7 @@ const editedItem = ref({
   productName: "",
   qty: 0,
   amount: 0,
+  price: 0,
 });
 const defaultItem = ref({
   id: 0,
@@ -191,6 +200,7 @@ const defaultItem = ref({
   productName: "",
   qty: 0,
   amount: 0,
+  price: 0,
 });
 const formTitle = computed(() => {
   return editedIndex.value === -1 ? "New Item" : "Edit Item";
@@ -241,9 +251,11 @@ function closeDelete() {
 function save() {
   if (editedIndex.value > -1) {
     //Object.assign(getAllSo.value[editedIndex.value], editedItem.value);
+    //Modify
     store.editPostAction(editedItem.value, jwtHeadder);
   } else {
-    getAllSo.value.push(editedItem.value);
+    //Add
+    store.addPostAction(editedItem.value, jwtHeadder);
   }
   close();
 }
