@@ -1,9 +1,10 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import Home from './components/newhome.vue'
+import Home from './components/Home.vue'
 import About from './components/About.vue'
 import AddSo from './components/AddSo.vue'
 import EditPost from './components/EditPost.vue'
 import Login from './components/Login.vue'
+import SaleOrderList from './components/SaleOrderList.vue'
 
 export default createRouter({
   linkActiveClass: 'active',
@@ -33,6 +34,11 @@ export default createRouter({
       path: '/home',
       name: 'Home',
       component: Home
+    },
+    {
+      path: '/solist',
+      name: 'solist',
+      component: SaleOrderList
     },
   ]
 })

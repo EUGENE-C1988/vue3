@@ -5,13 +5,7 @@
     consectetur quo consequuntur beatae sapiente illum atque quia aut nulla
     explicabo.
   </div>
-  <p>
-    {{ copyright }}
-  </p>
 </template>
-<script setup>
-/* import { inject } from 'vue'
-const copyright = inject('copyright') */
-</script>
+<script setup></script>
 
 <style scoped></style>

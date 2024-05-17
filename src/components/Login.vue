@@ -1,32 +1,6 @@
-<script setup>
-import { userLoginStore } from "@/store/LoginStore.js";
-import { reactive, computed, ref } from "vue";
-import { useRoute, useRouter } from "vue-router";
-
-const loginInfo = reactive({
-  userID: "",
-  userPassWord: "",
-});
-
-const store = userLoginStore();
-const route = useRoute();
-const router = useRouter();
-
-const show1 = ref(false);
-
-function onSubmit() {
-  store.LoginAction(loginInfo);
-  router.push("/home");
-}
-</script>
-
 <template>
   <div>
     <form @submit.prevent="onSubmit">
-      <!-- <div class="alert alert-info">
-      Username: test<br />
-      Password: test
-    </div> -->
       <v-responsive class="mx-auto" max-width="300">
         <h2>Login</h2>
         <div
@@ -67,3 +41,24 @@ function onSubmit() {
     </form>
   </div>
 </template>
+<script setup>
+import { userLoginStore } from "@/store/LoginStore.js";
+import { reactive, computed, ref } from "vue";
+import { useRoute, useRouter } from "vue-router";
+
+const loginInfo = reactive({
+  userID: "",
+  userPassWord: "",
+});
+
+const store = userLoginStore();
+const route = useRoute();
+const router = useRouter();
+
+const show1 = ref(false);
+
+function onSubmit() {
+  store.LoginAction(loginInfo);
+  router.push("/home");
+}
+</script>

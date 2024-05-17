@@ -1,4 +1,7 @@
 <template>
+  <header>
+    <Header />
+  </header>
   <div>
     <h3>Sale Order</h3>
     <v-data-table
@@ -149,6 +152,7 @@
 
 <script setup>
 //import MyModal from "@/components/MyModal.vue";
+import Header from "./Header.vue";
 import { useSoStore } from "@/store/SoStore.js";
 import { userUserInfoStore } from "@/store/UserInfoStore";
 import { computed, ref, nextTick, watch, reactive } from "vue";

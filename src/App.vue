@@ -1,8 +1,4 @@
 <template>
-  <header>
-    <Header />
-  </header>
-
   <div class="container">
     <div class="row">
       <div class="col-md-12">
@@ -11,21 +7,19 @@
         </main>
       </div>
     </div>
+    <footer>
+      <Footer />
+    </footer>
   </div>
-
-  <footer>
-    <Footer />
-  </footer>
 </template>
 
 <script setup>
-import Header from "./components/Header.vue";
-import Footer from "./components/Footer.vue";
+import Footer from "@/components/Footer.vue";
 </script>
 
 <style>
 /* Add your custom styles here */
 .container {
-  padding-top: 20px;
+  padding: 20px;
 }
 </style>

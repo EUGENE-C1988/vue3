@@ -1,14 +1,25 @@
 <template>
-  <h1 class="display-3"> Posts App </h1>
-  <h1 class="h6"> Seeing all posts. </h1>
-  <hr />
-  <add-post />
-  <hr />
-  <posts />
+  <header>
+    <Header />
+  </header>
+  <div>
+    <v-card class="mx-auto my-8" elevation="16" max-width="344">
+      <v-card-item>
+        <v-card-title> WELCOME PAGE</v-card-title>
+
+        <v-card-subtitle> Card subtitle secondary text </v-card-subtitle>
+      </v-card-item>
+
+      <v-card-text>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua.
+      </v-card-text>
+    </v-card>
+  </div>
 </template>
 
 <script setup>
-import Posts from "@/components/Posts.vue"
-import AddPost from "@/components/AddPost.vue"
+import Header from "./Header.vue";
 </script>
 
+<style lang="scss" scoped></style>
