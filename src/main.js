@@ -9,7 +9,6 @@ import * as directives from 'vuetify/directives'
 import '@mdi/font/css/materialdesignicons.css'
 
 //vue-navigation-bar
-
 //Vue.component('vue-navigation-bar', VueNavigationBar)
 
 //Pinia
@@ -23,7 +22,6 @@ const vuetify = createVuetify({
   components,
   directives,
 })
-
 
 createApp(App).use(createPinia()).use(router).use(vuetify).mount('#app')
 

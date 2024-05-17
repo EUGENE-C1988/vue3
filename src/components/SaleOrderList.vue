@@ -117,41 +117,10 @@
         <v-icon size="small" @click="deleteItem(item)"> mdi-delete </v-icon>
       </template>
     </v-data-table>
-
-    <!-- <ul class="list-group">
-      <li class="list-group-item" v-for="so in getAllSo" v-bind:key="so.id">
-        <strong> Id : </strong> {{ so.id }} <br />
-        <strong> Order Item : </strong> {{ so.orderItem }} <br />
-        <strong> Order No : </strong> {{ so.orderNo }} <br />
-        <strong> Price : </strong> {{ so.price }} <br />
-        <strong> Product Name : </strong> {{ so.productName }} <br />
-        <strong> Qty : </strong> {{ so.qty }} <br />
-        <strong> Amount : </strong> {{ so.amount }} <br />
-
-        <button @click="toggleModal(so.id)">Edit</button>
-        <button @click="deleteItem(so.id)">Delete</button>
-
-        
-        <my-modal
-          v-if="showModalStates[so.id]"
-          :show="showModalStates[so.id]"
-          :id="so.id"
-          :orderNo="so.orderNo"
-          :orderItem="so.orderItem"
-          :price="so.price"
-          :productName="so.productName"
-          :qty="so.qty"
-          :amount="so.amount"
-          @close="toggleModal(so.id)"
-        >
-        </my-modal>
-      </li>
-    </ul> -->
   </div>
 </template>
 
 <script setup>
-//import MyModal from "@/components/MyModal.vue";
 import Header from "./Header.vue";
 import { useSoStore } from "@/store/SoStore.js";
 import { userUserInfoStore } from "@/store/UserInfoStore";
@@ -186,7 +155,6 @@ const headers = [
 ];
 const dialog = ref(false);
 const dialogDelete = ref(false);
-//const desserts = ref([]);
 const editedIndex = ref(-1);
 const editedItem = ref({
   id: 0,
@@ -210,19 +178,6 @@ const formTitle = computed(() => {
   return editedIndex.value === -1 ? "New Item" : "Edit Item";
 });
 
-/* const showModal = ref(false); */
-// Create a reactive state for showModal for each sale order
-//const showModalStates = ref({});
-
-// Function to toggle showModal for a specific sale order
-// const toggleModal = (id) => {
-//   showModalStates.value[id] = !showModalStates.value[id];
-// };
-
-// const deleteItem = (id) => {
-//   store.removePostAction(id);
-// };
-
 function editItem(item) {
   editedIndex.value = getAllSo.value.indexOf(item);
   editedItem.value = Object.assign({}, item);
@@ -234,7 +189,6 @@ function deleteItem(item) {
   dialogDelete.value = true;
 }
 function deleteItemConfirm() {
-  //getAllSo.value.splice(editedIndex.value, 1);
   store.removePostAction(editedItem.value.id, jwtHeadder);
   closeDelete();
 }
@@ -254,7 +208,6 @@ function closeDelete() {
 }
 function save() {
   if (editedIndex.value > -1) {
-    //Object.assign(getAllSo.value[editedIndex.value], editedItem.value);
     //Modify
     store.editPostAction(editedItem.value, jwtHeadder);
   } else {
@@ -263,12 +216,6 @@ function save() {
   }
   close();
 }
-// watch(dialog, (val) => {
-//   val || close();
-// });
-// watch(dialogDelete, (val) => {
-//   val || closeDelete();
-// });
 </script>
 
 <style scoped></style>
