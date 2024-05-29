@@ -42,23 +42,32 @@
   </div>
 </template>
 <script setup>
-import { userLoginStore } from "@/store/LoginStore.js";
-import { reactive, computed, ref } from "vue";
+import { reactive, computed, ref, onMounted } from "vue";
 import { useRoute, useRouter } from "vue-router";
+import axios from "axios";
 
-const loginInfo = reactive({
+const loginInfo = ref({
   userID: "",
   userPassWord: "",
 });
 
-const store = userLoginStore();
 const route = useRoute();
 const router = useRouter();
 
 const show1 = ref(false);
 
 function onSubmit() {
-  store.LoginAction(loginInfo);
+  retrieveUserInfo();
+}
+
+async function retrieveUserInfo() {
+  const fetchData = await axios.post(
+    "https://localhost:7297/Login",
+    loginInfo.value
+  );
+
+  localStorage.setItem("UserInfoObj", JSON.stringify(fetchData.data));
+  //debugger;
   router.push("/home");
 }
 </script>

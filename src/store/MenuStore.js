@@ -29,6 +29,7 @@ function generatorMenu(apiData){
     const addItem={
     type:"link",
     text:itemObj_f.displayName,
+    //arrowColor: "#659CC8",
     subMenuOptions:[]
   }
     let secondLevelObj=[];
@@ -41,28 +42,28 @@ function generatorMenu(apiData){
           type: "link",
           text: itemObj_s.displayName,
           subText: itemObj_s.description,
-          path: itemObj_s.url
+          path: itemObj_s.url,
+          //iconLeft: '<i class="fa fa-star fa-fw"></i>',
           },)
       if (secondLevelObj.length != secondLevel.length+hrLineCount){
         secondLevelObj.push({type: "hr"},)
         hrLineCount++;
       }
-      console.log(`secondLevelObj:${secondLevelObj.length}`)
-      console.log(`secondLevel:${secondLevel.length}`)
+
     }
     addItem.subMenuOptions=secondLevelObj
     menuObj.push(addItem);
   //console.log(JSON.stringify(secondLevelObj));
   //console.log("----------------------")
-  //console.log(menuObj)
+  console.log(menuObj)
   }
   return menuObj
 }
 
 function interpreterMenu(menuObj) {
   let navbarOptions = {};
-   let navabarleft ={menuOptionsLeft:generatorMenu(menuObj)}
-  
+  let navabarleft ={menuOptionsLeft:generatorMenu(menuObj)}
+  //Sample Code
   // let navabarleft = {
   //   menuOptionsLeft: [
   //     {
@@ -145,19 +146,19 @@ function interpreterMenu(menuObj) {
   //     },
   //   ],
   // };
-  //console.log(JSON.stringify(navabarleft))
+  console.log(JSON.stringify(navabarleft))
   let navabarright = {
     menuOptionsRight: [
       {
         type: "button",
         text: "Signup",
-        path: { name: "signup" },
+        path: { name: "solist" },
         class: "button-red",
       },
       {
         type: "button",
-        text: "Login",
-        path: { name: "login" },
+        text: "Logout",
+        path: "/logout",
         iconRight:
           '<svg id="i-arrow-right" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"> <path d="M22 6 L30 16 22 26 M30 16 L2 16" /> </svg>',
       },

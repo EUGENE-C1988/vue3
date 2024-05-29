@@ -5,6 +5,7 @@ import AddSo from './components/AddSo.vue'
 import EditPost from './components/EditPost.vue'
 import Login from './components/Login.vue'
 import SaleOrderList from './components/SaleOrderList.vue'
+import Logout from './components/Logout.vue'
 
 export default createRouter({
   linkActiveClass: 'active',
@@ -14,6 +15,11 @@ export default createRouter({
       path: '/',
       name: 'login',
       component: Login
+    },
+    {
+      path: '/logout',
+      name: 'logout',
+      component: Logout
     },
     {
       path: '/about',
