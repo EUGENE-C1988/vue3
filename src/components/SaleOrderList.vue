@@ -10,6 +10,8 @@
       item-key="id"
       items-per-page="10"
       multi-sort
+      fixed-header
+      height="400"
     >
       <template v-slot:top>
         <v-toolbar flat>

@@ -55,7 +55,7 @@ function generatorMenu(apiData){
     menuObj.push(addItem);
   //console.log(JSON.stringify(secondLevelObj));
   //console.log("----------------------")
-  console.log(menuObj)
+  //console.log(menuObj)
   }
   return menuObj
 }
