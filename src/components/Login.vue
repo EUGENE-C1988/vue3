@@ -62,7 +62,7 @@ function onSubmit() {
 
 async function retrieveUserInfo() {
   const fetchData = await axios.post(
-    "https://localhost:7297/Login",
+    "https://localhost:44307/Login",
     loginInfo.value
   );
 

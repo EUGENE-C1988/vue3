@@ -1,21 +1,22 @@
-import { defineStore } from 'pinia'
-import axios from 'axios'
+import { defineStore } from "pinia";
+import axios from "axios";
 
-export const SystemAuthStore = defineStore('SystemAuthStore', {
-    state: () => ({
-    SystemAuth: []
+export const SystemAuthStore = defineStore("SystemAuthStore", {
+  state: () => ({
+    SystemAuth: [],
   }),
   getters: {
     getAllRole: (state) => {
-      return state.SystemAuth
+      return state.SystemAuth;
     },
   },
   actions: {
     async getRoleAuthAction(jwtHeadder) {
       const response = await axios.get(
-        'https://localhost:7297/SystemAuth',jwtHeadder
-      )
-      this.SystemAuth = response.data
+        "https://localhost:44307/SystemAuth",
+        jwtHeadder
+      );
+      this.SystemAuth = response.data;
     },
-  }
-})
+  },
+});

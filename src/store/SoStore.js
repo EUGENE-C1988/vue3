@@ -16,19 +16,19 @@ export const useSoStore = defineStore('SaleOrderStore', {
   actions: {
     async getSoAction(jwtHeadder) {
       const response = await axios.get(
-        'https://localhost:7297/Card',jwtHeadder
+        'https://localhost:44307/Card',jwtHeadder
       )
       this.SaleOrders = response.data
     },
     async addPostAction(post,jwtHeadder) {
       const response = await axios.post(
-        'https://localhost:7297/Card', post, jwtHeadder
+        'https://localhost:44307/Card', post, jwtHeadder
       )
       post.id = response.data
       this.SaleOrders.unshift(post)
     },
     async removePostAction(id,jwtHeadder) {
-      await axios.delete(`https://localhost:7297/Card/${id}`, jwtHeadder);
+      await axios.delete(`https://localhost:44307/Card/${id}`, jwtHeadder);
       const index = this.SaleOrders.findIndex(item => item.id === id);
       if (index !== -1) {
         this.SaleOrders.splice(index, 1);
@@ -37,7 +37,7 @@ export const useSoStore = defineStore('SaleOrderStore', {
     async editPostAction(post,jwtHeadder) {
       console.log(post)
       await axios.put(
-        `https://localhost:7297/Card/${post.id}`,
+        `https://localhost:44307/Card/${post.id}`,
         post,jwtHeadder
       );
       const index = this.SaleOrders.findIndex(c => c.id === post.id)

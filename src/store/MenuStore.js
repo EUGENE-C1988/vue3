@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import axios from 'axios'
-import brandImage from "@/assets/GPI_logo.png";
+import brandImage from "@/assets/heidenhain-logo.png";
 
 export const useMenuStore = defineStore('MenuStore', {
     state: () => ({
@@ -14,7 +14,7 @@ export const useMenuStore = defineStore('MenuStore', {
   actions: {
     async getMenuAction(ID,jwtHeadder) {
       const response = await axios.get(
-        `https://localhost:7297/Menu?UserID=${ID}`,jwtHeadder
+        `https://localhost:44307/Menu?UserID=${ID}`,jwtHeadder
       )
       this.MenuStore = interpreterMenu(response.data)
     },
