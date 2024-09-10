@@ -23,61 +23,75 @@
                   label="Description"
                   variant="solo"
                   v-model="editRole.desc"
-                ></v-text-field></v-col
-              ><v-col col="2">
+                ></v-text-field
+              ></v-col>
+            </v-row>
+            <v-row>
+              <v-col col="2">
                 <v-btn
                   prepend-icon="mdi-plus-thick"
                   variant="tonal"
                   @click="addRole()"
-                  v-if="!showButton"
+                  v-if="showButton"
                 >
-                  ADD
-                </v-btn>
+                  ADD </v-btn
+                >&nbsp;
                 <v-btn
                   prepend-icon="mdi-content-save"
                   variant="tonal"
                   @click="saveRole()"
                   v-if="showButton"
                 >
-                  Save
+                  Save </v-btn
+                >&nbsp;
+                <v-btn
+                  prepend-icon="mdi-delete"
+                  variant="tonal"
+                  @click="deleteRole()"
+                  v-if="showButton"
+                >
+                  Delete </v-btn
+                >&nbsp;
+                <v-btn
+                  prepend-icon="mdi-cancel"
+                  variant="tonal"
+                  @click="cancel()"
+                  v-if="showButton"
+                >
+                  Cancel
                 </v-btn></v-col
-              ></v-row
-            >
+              >
+            </v-row>
           </v-container> </v-card
         ><br />
         <v-card class="mx-auto">
           <v-list density="compact">
             <v-list-item-group>
               <v-list-item
-                v-for="item in allRole"
-                :key="item.value"
+                v-for="item in allRoles"
+                :key="item.guid"
                 :value="item.value"
                 color="primary"
-                @click="clickRole(item.value)"
+                @click="clickRole(item)"
               >
                 <v-list-item-content>
                   <v-container>
                     <v-row>
                       <v-col cols="9">
                         <v-list-item-title
-                          v-text="item.title"
+                          v-text="item.roleName"
                         ></v-list-item-title>
                       </v-col>
                       <v-clo cols="3">
                         <v-btn
                           icon="mdi-pencil"
                           @click="modifyRole(item)"
-                        ></v-btn
-                        >&nbsp
-                        <v-btn
-                          icon="mdi-delete"
-                          @click="deleteRole(item)"
                         ></v-btn>
                       </v-clo>
                     </v-row>
                     <v-row>
                       <v-list-item-subtitle>{{
-                        item.value
+                        item.roleDesc
                       }}</v-list-item-subtitle>
                     </v-row>
                   </v-container>
@@ -109,7 +123,7 @@
 import Header from "./Header.vue";
 import { reactive, ref, computed } from "vue";
 import { userUserInfoStore } from "@/store/UserInfoStore";
-import { SystemAuthStore } from "@/store/SystemAuthStore";
+import { SystemRoleStore } from "@/store/SystemRoleStore";
 
 //Retrieve jwt
 const userInfoStore = userUserInfoStore();
@@ -117,44 +131,49 @@ userInfoStore.GetUserInfoAction();
 const userInfo = computed(() => userInfoStore.getUserInfoObj);
 const jwtHeadder = userInfoStore.getTokenObj;
 
-const store = SystemAuthStore();
-store.getRoleAuthAction(jwtHeadder);
-const getAllRole = computed(() => store.getAllRole);
+const store = SystemRoleStore();
+store.getRolesAction(jwtHeadder);
+const allRoles = computed(() => store.getAllRoles);
 
 //vuetify data table
-const showButton = ref(false);
+const showButton = ref(true);
 const editRole = reactive({ name: "", desc: "" });
 const allUser = ref(["John", "Jacob", "Tony"]);
 const selectedUsers = ref([]);
 const selectedRole = ref("");
-const allRole = [
-  {
-    title: "Item #1",
-    value: 1,
-  },
-  {
-    title: "Item #2",
-    value: 2,
-  },
-  {
-    title: "Item #3",
-    value: 3,
-  },
-  {
-    title: "Item #4",
-    value: 4,
-  },
-  {
-    title: "Item #5",
-    value: 5,
-  },
-];
 
-function clickRole(s) {
-  selectedRole.value = s.value;
-  selectedUsers.value = [];
-  showButton.value = !showButton.value;
+// const allRoles = ref([
+//   {
+//     roleName: "Item #1",
+//     roleDesc: 1,
+//   },
+//   {
+//     roleName: "Item #2",
+//     roleDesc: 2,
+//   },
+//   {
+//     roleName: "Item #3",
+//     roleDesc: 3,
+//   },
+//   {
+//     roleName: "Item #4",
+//     roleDesc: 4,
+//   },
+//   {
+//     roleName: "Item #5",
+//     roleDesc: 5,
+//   },
+// ]);
+
+//Display selected role's accounts
+function clickRole(selectedItem) {
+  alert(selectedItem.guid);
+  editRole.name = selectedItem.roleName;
+  editRole.desc = selectedItem.roleDesc;
+  //selectedUsers.value = [];
+  //showButton.value = !showButton.value;
   //alert(selectedRole);
+
   //selected.value.push("John");
 }
 
@@ -162,19 +181,28 @@ function updateUser() {
   alert(selectedRole);
 }
 
-function deleteRole(role) {
-  alert(role);
+function deleteRole(selectedItem) {
+  const aa = "Delete selected role";
+  alert(aa);
 }
 
-function modifyRole(selectedItem) {
-  alert(selectedItem.title);
-  editRole.name = selectedItem.title;
-  editRole.desc = selectedItem.value;
+//
+function modifyRole(selectedItem) {}
+
+function addRole() {
+  allRoles.value.push({
+    title: "abcd",
+    value: 12345,
+  });
+  alert(allRoles);
 }
 
-function addRole() {}
+function saveRole(selectedItem) {
+  const aa = "Save selected role";
+  alert(aa);
+}
 
-function saveRole() {}
+function cancel() {}
 </script>
 
 <style lang="scss" scoped></style>
