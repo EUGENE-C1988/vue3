@@ -106,11 +106,11 @@
         <v-card class="mx-auto" max-width="600">
           <p>{{ selectedUsers }}</p>
           <v-checkbox-btn
-            v-for="userItem in allUser"
-            :key="userItem"
+            v-for="userItem in allAccounts"
+            :key="userItem.guid"
             v-model="selectedUsers"
-            :label="userItem"
-            :value="userItem"
+            :label="userItem.userName"
+            :value="userItem.guid"
             @click="updateUser()"
           ></v-checkbox-btn>
         </v-card>
@@ -124,6 +124,7 @@ import Header from "./Header.vue";
 import { reactive, ref, computed } from "vue";
 import { userUserInfoStore } from "@/store/UserInfoStore";
 import { SystemRoleStore } from "@/store/SystemRoleStore";
+import { SystemAccountStore } from "../store/SystemAccountStore";
 
 //Retrieve jwt
 const userInfoStore = userUserInfoStore();
@@ -131,14 +132,18 @@ userInfoStore.GetUserInfoAction();
 const userInfo = computed(() => userInfoStore.getUserInfoObj);
 const jwtHeadder = userInfoStore.getTokenObj;
 
-const store = SystemRoleStore();
-store.getRolesAction(jwtHeadder);
-const allRoles = computed(() => store.getAllRoles);
+const storeR = SystemRoleStore();
+storeR.getRolesAction(jwtHeadder);
+const allRoles = computed(() => storeR.getAllRoles);
+
+const storeA = SystemAccountStore();
+storeA.getAccountsAction(jwtHeadder);
+const allAccounts = computed(() => storeA.getAllAccounts);
 
 //vuetify data table
 const showButton = ref(true);
 const editRole = reactive({ name: "", desc: "" });
-const allUser = ref(["John", "Jacob", "Tony"]);
+//const allUser = ref(["John", "Jacob", "Tony"]);
 const selectedUsers = ref([]);
 const selectedRole = ref("");
 

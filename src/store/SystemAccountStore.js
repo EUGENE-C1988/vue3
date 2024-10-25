@@ -7,13 +7,13 @@ export const SystemAccountStore = defineStore("SystemAccountStore", {
   }),
   getters: {
     getAllAccounts: (state) => {
-      return state.AllRoles;
+      return state.AllAccounts;
     },
   },
   actions: {
     async getAccountsAction(jwtHeadder) {
       const response = await axios.get(
-        "https://localhost:44307/SysAuth",
+        "https://localhost:44307/SysAuth/A",
         jwtHeadder
       );
       this.AllAccounts = response.data;

@@ -13,7 +13,7 @@ export const SystemRoleStore = defineStore("SystemRoleStore", {
   actions: {
     async getRolesAction(jwtHeadder) {
       const response = await axios.get(
-        "https://localhost:44307/SysAuth",
+        "https://localhost:44307/SysAuth/R",
         jwtHeadder
       );
       this.AllRoles = response.data;
